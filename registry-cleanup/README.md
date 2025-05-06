@@ -6,7 +6,7 @@ Run this to collect the TLS key from the registry pod. You'll need this to form 
 
 ## 01-docker.sh
 
-Using Docker helps guarantee that the same Python environment gets used every time
+Using Docker helps ensure that the same Python environment gets used every time
 
 ## 02-dependencies.sh
 
