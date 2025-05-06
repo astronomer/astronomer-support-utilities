@@ -8,3 +8,14 @@ This script uses the `kubectl logs` command to gather logs from the platform con
 * A functioning kubeconfig
 * `kubectl`
 * The `openssl` CLI (to generate random characters for file naming reasons)
+
+
+## registry-cleanup
+
+This script cleans up old images from the Software registry. You can find full instructions here
+https://support.astronomer.io/hc/en-us/articles/4416479648275-How-to-clean-up-the-Astronomer-registry
+
+### Dependencies
+* Docker (for the Python environment)
+* `kubectl`
+* 
