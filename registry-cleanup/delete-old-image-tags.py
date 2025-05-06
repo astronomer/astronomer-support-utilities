@@ -3,7 +3,7 @@ import base64
 import hashlib
 import logging
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 from uuid import uuid4
 
 import jwt
@@ -62,7 +62,8 @@ def get_private_key():
 
 
 def get_token_payload(client):
-    now = datetime.utcnow()
+    #now = datetime.utcnow()
+    now = datetime.now(UTC)
     token_payload = {
         'iss': ISSUER,
         'sub': 'registry',
@@ -86,7 +87,7 @@ def construct_token_response(client):
                            'kid': get_kid()
                        },
                        algorithm='RS256')
-    return token.decode('utf-8')
+    return token
 
 
 def get_all_tags(session, registry, client):
