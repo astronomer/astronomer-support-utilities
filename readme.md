@@ -15,7 +15,7 @@ This script uses the `kubectl logs` command to gather logs from the platform con
 This script cleans up old images from the Software registry. You can find full instructions here
 https://support.astronomer.io/hc/en-us/articles/4416479648275-How-to-clean-up-the-Astronomer-registry
 
-*NOTE - Unless your Astronomer platform uses public certs or you install your root CA into the Docker container, you will see TLS verification warnings.*
+*NOTE - Unless your Astronomer platform uses public certs or you install your root CA into the Docker container, you will see TLS verification warnings. If your laptop has the root CA installed, you could make a virtual env instead of using Docker and that will prevent the TLS verification warnings*
 
 ### Dependencies
 * Docker (for the Python environment)
