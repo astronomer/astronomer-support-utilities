@@ -1,42 +1,21 @@
-# Docker registry cleanup command line tool
+This is a Python script that will connect to the Astronomer self-hosted registry pod and delete old images based on the flags you provide.
 
+## 00-get-key.sh
 
-1. First, get the credentials. If your platform release name is not called "astronomer" change it in the command below
+Run this to collect the TLS key from the registry pod. You'll need this to form requests to the registry.
 
-```sh
-mkdir -p keys && kubectl get secret -n astronomer astronomer-tls -o jsonpath='{.data.tls\.key}' | base64 -d > keys/tls.key
+## 01-docker.sh
 
-```
+Using Docker helps guarantee that the same Python environment gets used every time
 
-(If you  are running from OSX, replace base64 -d​ with base64 -D​)
+## 02-dependencies.sh
 
+It's just a pip3 install
 
-2. Install the required python modules:
+## 03-run-script.sh
 
+This will run `delete-old-image-tags.py` to do the cleanup.
 
-```sh
-pip3 install -r requirements.txt
-```
-
-3. Run the script with dry run to see what it would delete: (correct the registry below)
-
-```sh
-python3 ./delete-old-image-tags.py --dry-run --deployment-release-name modern-rocket-1234 -r registry.BASEDOMAIN --image-tag-prefix deploy
-```
-
-4. If the dry run looks sensible, re-run the command without `--dry-run`. This command may print the occasional 404 error, those can usually be ignored.
-
-
-5. We need to tell the [Registry](https://docs.docker.com/registry/) to actually delete the now unreferenced files (again, correcting the "astronomer" namespace if it is not where your platform is deployed):
-
-
-```sh
-kubectl exec -n astronomer -ti $(kubectl -n astronomer get pods -l component=registry -o jsonpath="{.items[*].metadata.name}") -c registry -- registry garbage-collect /etc/docker/registry/config.yml
-```
-
-This last command should print a lot of output, but should start deleting files. There may be a long pause after it prints lines about "marking blob" before it starts deleting blobs.
-
-If you have a number of images with a large number of tags you can repeat steps 3, 4, then run step 5 once at the end.
-
-Once you are done you should remove the key you extracted from Kubernetes:
-`rm keys/tls.key`
+Depends on two environment variables
+1. `ASTRONOMER_RELEASE_NAME` - the release name of the deployment who's images you want to clean up
+1. `ASTRONOMER_REGISTRY` - this just needs to be `registry.$BASE_DOMAIN`
