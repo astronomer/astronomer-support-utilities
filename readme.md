@@ -17,27 +17,26 @@ https://support.astronomer.io/hc/en-us/articles/4416479648275-How-to-clean-up-th
 
 *NOTE - Unless your Astronomer platform uses public certs or you install your root CA into the Docker container, you will see TLS verification warnings. If your laptop has the root CA installed, you could make a virtual env instead of using Docker and that will prevent the TLS verification warnings*
 
+### Dependencies
+* Docker (for the Python environment)
+* `kubectl` to collect the key
 
-## 00-get-key.sh
+### 00-get-key.sh
 
 Run this to collect the TLS key from the registry pod. You'll need this to form requests to the registry.
 
-## 01-docker.sh
+### 01-docker.sh
 
 Using Docker helps ensure that the same Python environment gets used every time
 
-## 02-dependencies.sh
+### 02-dependencies.sh
 
 It's just a pip3 install
 
-## 03-run-script.sh
+### 03-run-script.sh
 
 This will run `delete-old-image-tags.py` to do the cleanup.
 
 Depends on two environment variables
 1. `ASTRONOMER_RELEASE_NAME` - the release name of the deployment who's images you want to clean up
 1. `ASTRONOMER_REGISTRY` - this just needs to be `registry.$BASE_DOMAIN`
-
-### Dependencies
-* Docker (for the Python environment)
-* `kubectl` to collect the key
