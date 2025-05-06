@@ -113,3 +113,5 @@ do
     kubectl -n $ASTRONOMER_NAMESPACE -c $CONTAINER logs $i > logs/$LOG_NAME.log
 done
 
+tar --create --file logs.tar logs/
+
