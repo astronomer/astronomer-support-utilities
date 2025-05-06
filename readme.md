@@ -6,4 +6,5 @@ This script uses the `kubectl logs` command to gather logs from the platform con
 
 ### Dependencies
 * A functioning kubeconfig
+* `kubectl`
 * The `openssl` CLI (to generate random characters for file naming reasons)
