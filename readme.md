@@ -40,3 +40,11 @@ This will run `delete-old-image-tags.py` to do the cleanup.
 Depends on two environment variables
 1. `ASTRONOMER_RELEASE_NAME` - the release name of the deployment who's images you want to clean up
 1. `ASTRONOMER_REGISTRY` - this just needs to be `registry.$BASE_DOMAIN`
+
+
+## airflow-chart
+
+Under normal circumstances you do not deploy the Airflow chart yourself as that is handled by the Astronomer platform. However, every now and then you might need to deploy the chart manually in order to have more control over the configuration. If you do, you can use the `airflow-chart.sh` script as an example of how to specify the chart version and the chart name and location.
+
+### Dependencies
+None
