@@ -2,11 +2,10 @@
 
 set -euo pipefail
 
-helm upgrade --install release_name airflow \
+helm upgrade release_name airflow \
 --repo https://helm.astronomer.io \
---version "v1.13.5" \
+--version "v1.14.3" \
 --namespace the_namespace \
---values values.yaml \
 --debug \
---reset-values \
+--reuse-values \
 --wait
