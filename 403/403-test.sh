@@ -2,15 +2,14 @@
 
 set -euo pipefail
 
-if [[ $# -ne 4 ]]; then
-  echo "usage: $0 cluster_id organization_id deployment_id blob_sha" 1>&2
+if [[ $# -ne 3 ]]; then
+  echo "usage: $0 cluster_id organization_id deployment_id" 1>&2
   exit 1
 fi
 
 CLUSTER_ID="$1"
 ORGANIZATION_ID="$2"
 DEPLOYMENT_ID="$3"
-SHA="$4"
 
 if [[ -z $ASTRO_TOKEN ]]; then
   echo "ASTRO_TOKEN is required, get one from cloud.astronomer.io/token" 1>&2
@@ -53,4 +52,4 @@ check_token_expiry "$ASTRO_TOKEN" || exit 3
 
 REGISTRY_TOKEN="$(get_registry_token "$ORGANIZATION_ID" "$DEPLOYMENT_ID")" || exit 4
 
-curl --head "https://${CLUSTER_ID}.registry.astronomer.run/v2/${ORGANIZATION_ID}/${DEPLOYMENT_ID}/blobs/sha256:$SHA" --header "Authorization: Bearer $REGISTRY_TOKEN"
+curl --head "https://${CLUSTER_ID}.registry.astronomer.run/v2/${ORGANIZATION_ID}/${DEPLOYMENT_ID}/blobs/sha256:6a9d5e1c57fc7c1a03dc73b5566630fbb60349448ba23641812e6c1f9e89ed4b" --header "Authorization: Bearer $REGISTRY_TOKEN"
